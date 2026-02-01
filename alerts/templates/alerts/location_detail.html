@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ location.name }}</title>
+</head>
+<body>
+    <h1>{{ location.name }}</h1>
+    {% if location.address %}
+    <p><strong>Address:</strong> {{ location.address }}</p>
+    {% endif %}
+    {% if location.latitude and location.longitude %}
+    <p><strong>Coordinates:</strong> {{ location.latitude }}, {{ location.longitude }}</p>
+    {% endif %}
+    <p><strong>Alerts:</strong>
+        <ul>
+            {% for alert in location.alerts.all %}
+            <li><a href="{% url 'alerts:alert_detail' alert.pk %}">{{ alert.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </p>
+    <a href="{% url 'alerts:location_list' %}">Back to Locations</a>
+</body>
+</html>

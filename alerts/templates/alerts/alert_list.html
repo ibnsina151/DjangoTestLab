@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alerts</title>
+</head>
+<body>
+    <h1>Alerts</h1>
+    <ul>
+        {% for alert in alerts %}
+        <li><a href="{% url 'alerts:alert_detail' alert.pk %}">{{ alert.title }}</a> - {{ alert.alert_type }}</li>
+        {% endfor %}
+    </ul>
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>

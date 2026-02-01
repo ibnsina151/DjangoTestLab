@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ alert.title }}</title>
+</head>
+<body>
+    <h1>{{ alert.title }}</h1>
+    <p><strong>Type:</strong> {{ alert.get_alert_type_display }}</p>
+    <p><strong>Message:</strong> {{ alert.message }}</p>
+    <p><strong>Active:</strong> {{ alert.is_active|yesno }}</p>
+    <p><strong>Created:</strong> {{ alert.created_at }}</p>
+    <p><strong>Locations:</strong>
+        <ul>
+            {% for location in alert.locations.all %}
+            <li><a href="{% url 'alerts:location_detail' location.pk %}">{{ location.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </p>
+    <a href="{% url 'alerts:alert_list' %}">Back to Alerts</a>
+</body>
+</html>
